@@ -1,0 +1,16 @@
+.editor-wrapper{
+	display: table;
+	width: 100%;
+}
+
+textarea {
+	background: $light-theme-background;
+	min-width: 100%;
+	min-height: 100vh;
+	display: block;
+	border: 1px solid black;
+	height: 100%;
+	resize: none;
+	overflow-y: scroll;
+	margin: 0 !important;
+}

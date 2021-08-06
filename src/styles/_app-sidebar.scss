@@ -1,0 +1,87 @@
+.sidebar{
+	background: $app-sidebar-color;
+	color: $light-font-color;
+	display: flex;
+	flex-direction: column;
+	padding: 40px 10px;
+	border-right: 1px solid darken($app-sidebar-color, 10%);
+	z-index: 3;
+	width: 300px;
+	height: 100vh;
+	overflow-y: scroll;
+	.profile{
+		width: 100%;
+		margin: 10px auto 20px;
+		img, h2, p{
+			margin: 10px auto;
+			display: block;
+			width: fit-content;
+			font-size: 1.4em;
+		}
+	}
+	.nav-items{
+		display: flex;
+		flex-direction: column;
+		.nav-item{
+			display: flex;
+			width: fit-content;
+			margin: 0;
+			margin: 8px;
+			
+			cursor: pointer;
+			svg{
+				width: 28px;
+				height: 28px;
+				opacity: 0.4;
+			}
+			p{
+				margin: auto 10px;
+				font-size: 1.05em;
+				color: white;
+				opacity: 0.4;
+				font-family: 'Poppins Light';
+			}
+			&.active{
+				svg{
+					opacity: 1;
+				}
+				p{
+					opacity: 1;
+				}
+			}
+		}
+	}
+	.category-wrapper{
+		margin-top: 20px;
+		.category-header{
+			display: flex;
+			justify-content: space-between;
+			h2{
+				font-size: 1.05em;
+				text-transform: uppercase;
+			}
+		}
+		.nav-item{
+			margin: 8px 0;
+			width: 100%;
+			input{
+				margin: 0;
+				padding: 0.65rem !important;
+			}
+			a, p{
+				font-size: 1.1em !important;
+				font-family: 'Bariol Light';
+			}
+			svg{
+				margin-left: 5px;
+			}
+		}
+		svg{
+			width: 22px !important;
+			height: 22px !important;
+			margin: auto 0;
+		}
+		
+		
+	}
+}

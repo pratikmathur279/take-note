@@ -1,0 +1,126 @@
+%forms {
+  display: block;
+  border-radius: 0.3rem;
+  border: 1px solid $accent-gray;
+  padding: 0.75rem;
+  outline: none;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+%forms-focus {
+  outline: 0;
+  border: 1px solid lighten($primary, 15%);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+#{$forms} {
+  @extend %forms;
+
+  &:focus,
+  &:active {
+    @extend %forms-focus;
+  }
+}
+
+textarea:focus, input:focus{
+	outline: none;
+}
+
+.error{
+	color: red;
+}
+
+.login-wrapper{
+	width: 100vw;
+	height: 100vh;
+	display: table;
+	position: absolute;
+	background-color: #383840;
+	#login-form{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 400px;
+		max-width: 85vw;
+        height: fit-content;
+        border-radius: 5px;
+        justify-content: center;
+		// border: 1px solid grey;
+		background: white;
+		.header-md-6{
+			width: 100%;
+			height: fit-content;
+			padding: 20px 0 30px;
+			background-color: #dcdcdc;
+			.logo{
+				width: 140px;
+				height: auto;
+				display: block;
+				margin: 15px auto;
+			}
+			h2{
+				margin: 0 auto;
+				width: fit-content;
+			}
+		}
+		#tabs-container{
+			display: flex;
+			width: 100%;
+			.tab{
+				display: block;
+				flex: 1 0 50%;
+				background: white;
+				border-radius: 0;
+				margin: 0;
+				text-align: center;
+				color: $font-color;
+				border-bottom: 1px solid lightgrey;
+				&.active{
+					color: $font-color;
+					background: white !important;
+					border-bottom: 2px solid black;
+				}
+			}
+		}
+		
+		.form{
+			padding: 20px;
+			.col-md-6{
+				width: 100%;
+				margin: 20px 0;
+				input{
+					border-radius: 0;
+					border: none;
+					border-bottom: 1px solid #c4c4c4;
+					
+				}
+			}
+			.forgot-password{
+				color: black;
+				margin: auto;
+				width: fit-content;
+				display: block;
+			}
+			
+		}
+		.btn{
+			margin: auto;
+			display: block;
+			width: 100%;
+			padding: 30px;
+			font-family: 'Bariol';
+			font-size: 1.2em;
+			svg{
+				width: 24px;
+				height: 24px;
+				margin: auto;
+			}
+		}
+	}
+}

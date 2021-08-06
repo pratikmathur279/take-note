@@ -1,0 +1,218 @@
+.homepage{
+	width: 100%;
+	display: flex;
+	margin: 0;
+}
+
+.notes-wrapper{
+	display: flex;
+	height: 100vh;
+	&.night-active{
+		background: $nightMode;
+		.left-container{
+			background: $nightMode;
+			.notes-header{
+				h1, svg{
+					color: white;
+				}
+			}
+			.note-content{
+				color: white;
+			}
+		}
+		.right-container{
+			.note-content{
+				textarea, pre{
+					color: white;
+					background: $dimmer-night;
+				}
+			}
+		}
+	}
+	.left-container{
+		width: 300px;
+		border-right: 5px solid rgba(255, 255, 255, 0);
+		background: $accent-lightgray;
+		.notes-header{
+			display: flex;
+			justify-content: space-between;
+			padding: 0 10px;
+			h1{
+				font-size: 1.9em;
+				margin: 10px 0;
+				
+			}
+			svg{
+				width: 22px;
+				height: 22px;
+				margin: auto 0;
+				cursor: pointer;
+			}
+		}
+		.note-content{
+			padding: 10px 20px 10px 30px;
+			position: relative;
+			.favorite-icon{
+				position: absolute;
+				left: 8px;
+				top: 20px;
+				width: fit-content;
+				height: fit-content;
+			}
+			h3{
+				margin: 8px 0;
+				font-size: 1em;
+			}
+			.note{
+				display: flex;
+				width: fit-content;
+				margin: 4px;
+				cursor: pointer;
+				svg{
+					width: 18px;
+					height: 18px;
+					opacity: 0.4;
+				}
+				p{
+					margin: auto 5px;
+					font-size: 12px;
+					opacity: 0.4;
+					font-family: 'Source Sans Pro', sans-serif;
+				}
+			}
+			&.active{
+				background: $primary;
+				color: white;
+			}
+		}
+	}
+	.right-container{
+		width: calc(100% - 300px);
+		position: relative;
+		.note-content{
+			width: 100%;
+			word-break: break-all;
+			background-size: contain;
+			pre{
+				width: 100%;
+			}
+			pre[contenteditable = false]{
+				font-size: 1em;
+			}
+		}
+		
+	}
+}
+
+.editor-footer{
+	position: absolute;
+	bottom: 0px;
+	height: fit-content;
+	width: 100%;
+	padding: 0 30px 0 10px;
+	background: $accent-lightgray;
+	display: flex;
+	justify-content: space-between;
+	.container{
+		width: fit-content;
+		height: 100%;
+		display: flex;
+		justify-content: space-between;
+		.icon{
+			margin: 0px 5px;
+			height: 100%;
+			padding: 15px 12px;
+			position: relative;
+			display: inline-block;
+			cursor: pointer;
+			svg{
+				width: 22px;
+				height: 22px;
+				opacity: 1;
+			}
+			&:hover {
+				background: $accent-gray;
+				.tooltiptext {
+					opacity: 1;
+				}
+			}
+			.tooltiptext {
+				// visibility: hidden;
+				opacity: 0;
+				width: 100px;
+				background-color: black;
+				color: #fff;
+				text-align: center;
+				border-radius: 6px;
+				padding: 5px 10px 7px;
+				position: absolute;
+				z-index: 1;
+				bottom: 65px;
+				left: 50%;
+				font-size: 12px;
+				margin-left: -50px;
+				&::after{
+					content: "";
+					position: absolute;
+					top: 100%;
+					left: 50%;
+					margin-left: -5px;
+					border-width: 5px;
+					border-style: solid;
+					border-color: black transparent transparent transparent;
+				}
+			}
+			
+		}
+		.sync-status{
+			font-style: italic;
+			font-size: 0.85em;
+		}
+	}
+	.tooltip {
+		position: relative;
+		display: inline-block;
+		border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+		
+	}
+}
+
+#user-form{
+	width: 100%;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.profile-wrapper{
+	width: 100%;
+	max-width: 60vw;
+	margin: auto;
+	#photos-top{
+		p{
+			width: fit-content;
+			margin: 10px auto;
+			&:first-of-type{
+				font-size: 25px;
+				color: $primary;
+				
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+.profile-pic{
+	border-radius: 50%;
+	width: 100%;
+	margin: auto;
+	display: block;
+	max-width: 200px;
+}
+
+.user-form-wrapper{
+	width: 100%;
+	max-width: 60vw;
+	margin: auto;
+	display: block;
+}
