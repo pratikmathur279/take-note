@@ -30,8 +30,8 @@ gulp.task('imagemin', () => {
 
 gulp.task('connect', () => {
 	browserSync({
-		port: 3010,
-		proxy: 'localhost:3010'
+		port: 3005,
+		proxy: 'localhost:3005'
 	});
 });
 
