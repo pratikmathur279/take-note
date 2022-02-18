@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { AiOutlineEye } from 'react-icons/ai';
+
 const LoginForm = (props) => {
     return (
         <div className="form-wrapper">
@@ -10,6 +12,7 @@ const LoginForm = (props) => {
 
                 <div className="col-md-6">
                     <input type="password" className="form-control" placeholder="password" name="password" value={props.login.password} onChange={props.onFormChange} />
+                    <AiOutlineEye onClick={props.togglePassword} />
                 </div>
 
                 <div className="col-md-6">

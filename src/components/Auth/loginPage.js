@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoIosArrowForward } from 'react-icons/io';
 
-import logo from '../../assets/logo.png';
+import logo from '../../../public/images//logo.png';
 import Loading from '../common/loading';
 
 import UserActions from '../../actions/userActions';
@@ -18,9 +18,9 @@ class LoginPage extends React.Component {
                 email: "pratikmathur279@gmail.com"
             },
             signup: {
-                username: "pmathur",
-                password: "Pratik@27",
-                email: "pratikmathur279@gmail.com"
+                // username: "pmathur",
+                // password: "Pratik@27",
+                // email: "pratikmathur279@gmail.com"
             },
             error: '',
             loading: false,
@@ -29,6 +29,7 @@ class LoginPage extends React.Component {
         this.toggleTab = this.toggleTab.bind(this);
         this.signupUser = this.signupUser.bind(this);
         this.loginUser = this.loginUser.bind(this);
+        this.togglePassword = this.togglePassword.bind(this);
 
         this.actions = new UserActions();
     }
@@ -60,13 +61,22 @@ class LoginPage extends React.Component {
         this.setState({ currentTab: t });
     }
 
+    togglePassword() {
+        var x = document.getElementsByName("password")[0];
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
     render() {
         return (
             <div className="login-wrapper">
                 {this.state.loading ? <Loading /> : null}
                 <div id="login-form">
                     <div className="header-md-6">
-                        <img className="logo" src={logo} />
+                        <img className="app-logo logo" src={logo} />
                         <h2>Take Note</h2>
                     </div>
 
@@ -81,6 +91,7 @@ class LoginPage extends React.Component {
                             onFormChange={this.onFormChange}
                             loginUser={this.loginUser}
                             toggleTab={this.toggleTab}
+                            togglePassword={this.togglePassword}
                         />
                         :
                         <SignupForm

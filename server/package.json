@@ -4,7 +4,7 @@
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"start": "node index.js",
+		"start": "nodemon index.js",
 		"dev": "nodemon index.js"
 	},
 	"dependencies": {
@@ -27,6 +27,8 @@
 		"morgan": "~1.10.0",
 		"nodemon": "2.0.3",
 		"passport": "^0.4.1",
-		"passport-auth0": "^1.4.0"
+		"passport-auth0": "^1.4.0",
+		"path": "^0.12.7",
+		"sharp": "^0.28.3"
 	}
 }

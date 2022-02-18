@@ -4,6 +4,7 @@ import Navigation from '../Navigation/navigation';
 import RenderComponent from './renderComponent';
 
 import NoteActions from '../../actions/noteActions';
+import UserActions from '../../actions/userActions';
 import UserStore from '../../stores/userStore';
 
 class Homepage extends React.Component {
@@ -30,20 +31,16 @@ class Homepage extends React.Component {
 		this._onChange = this._onChange.bind(this);
 
 		this.noteActions = new NoteActions();
+		this.userActions = new UserActions();
 	}
 
 	componentDidMount() {
-		// UserStore.addChangeListener(this._onChange);
-		// let user = UserStore.getUser();
+		UserStore.addChangeListener(this._onChange);
+		let user = UserStore.getUser();
 
-		// if (process.env.NODE_ENV == 'production') {
-		// 	UserStore.addChangeListener(this._onChange);
-		// 	let user = UserStore.getUser();
-		// 	this.setState({ user: user });
-		// }
+		this.setState({ user });
 
 		this.noteActions.getNotes(this.state.user.email);
-		// this.setState({ user: user });
 	}
 
 	componentWillUnmount() {

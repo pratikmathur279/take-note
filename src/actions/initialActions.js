@@ -16,15 +16,15 @@ var InitialActions = {
         callback();
     },
 
-    loggedCheck: function () {
-        console.log("loggedCheck");
+    getUser(email) {
+        console.log(email);
         Request
-            .get('/session')
+            .get('/users')
             .set('X-Requested-With', 'XMLHttpRequest')
             .set('Accept', 'application/json')
             .end(function (err, res) {
                 if (err || !res.ok) {
-                    window.location.href = "/login?timeout=true";
+                    // window.location.href = "/login?timeout=true";
                 }
                 else {
                     let responseText = JSON.parse(res.text);
@@ -34,6 +34,38 @@ var InitialActions = {
                     });
                 }
             });
+    },
+
+    loggedCheck: function () {
+        console.log("loggedCheck");
+        let sess_id = JSON.parse(localStorage.getItem('sessionId'));
+        console.log(sess_id);
+
+        if (sess_id) {
+            this.getUser(sess_id.email);
+        }
+        else {
+            Dispatcher.dispatch({
+                actionType: ActionTypes.SET_USER,
+                user: {}
+            });
+        }
+        // Request
+        //     .get('/session')
+        //     .set('X-Requested-With', 'XMLHttpRequest')
+        //     .set('Accept', 'application/json')
+        //     .end(function (err, res) {
+        //         if (err || !res.ok) {
+        //             window.location.href = "/login?timeout=true";
+        //         }
+        //         else {
+        //             let responseText = JSON.parse(res.text);
+        //             Dispatcher.dispatch({
+        //                 actionType: ActionTypes.SET_USER,
+        //                 user: responseText
+        //             });
+        //         }
+        //     });
     }
 }
 

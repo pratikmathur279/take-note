@@ -7,7 +7,7 @@ TakeNote is a free, open-source notes app for the web. It is a demo project only
 
 Your notes are saved in local storage and will not be permanently persisted, but are available for download.
 
-View the source on [Github](https://github.com/taniarascia/takenote).
+View the source on [Github](https://github.com/pratikmathur279/take-note).
 
 ## Features
 

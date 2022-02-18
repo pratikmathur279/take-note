@@ -250,6 +250,8 @@ class Notes extends React.Component {
 			}
 		}
 
+		console.log(state);
+
 		this.setState(state);
 	}
 

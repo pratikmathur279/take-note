@@ -59,16 +59,23 @@ $forms: (
 // FONTS
 @font-face {
     font-family:'Bariol';
-    src:url('../fonts/bariol.ttf') format('truetype');
+    src:url('../fonts/bariol_regular-webfont.eot');
+    src:url('../fonts/font-name.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/bariol_regular-webfont.woff') format('woff'),
+        url('../fonts/bariol.ttf') format('truetype'),
+        url('../fonts/bariol_regular-webfont.svg#bariol') format('svg');
     font-weight:normal;
     font-style:normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family:'Honeymoon Avenue Script';
-    src:url('../fonts/Honeymoon_Avenue_Script.ttf') format('truetype');
+    src:url('../fonts/Honeymoon_Avenue_Script.ttf') format('truetype'),
+        url('../fonts/Honeymoon_Avenue_Script.otf') format('opentype');
     font-weight:normal;
     font-style:normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -77,6 +84,7 @@ $forms: (
         url('../fonts/Bariol_Light.otf') format('opentype');
     font-weight:normal;
     font-style:normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -84,6 +92,7 @@ $forms: (
     src:url('../fonts/SourceSansPro-Light.otf') format('opentype');
     font-weight:normal;
     font-style:normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -91,6 +100,7 @@ $forms: (
     src:url('../fonts/Bariol_Bold.otf') format('opentype');
     font-weight:normal;
     font-style:normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -98,6 +108,7 @@ $forms: (
     src: url('../fonts/Poppins-Bold.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -105,6 +116,7 @@ $forms: (
     src: url('../fonts/Poppins-Regular.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -112,11 +124,21 @@ $forms: (
     src: url('../fonts/Poppins-Light.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family:'Roboto Condensed Regular';
     src: url('../fonts/RobotoCondensed-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family:'Roboto Condensed Bold';
+    src: url('../fonts/RobotoCondensed-Bold.ttf') format('truetype');
     font-weight:normal;
     font-style:normal;
+    font-display: swap;
 }

@@ -1,6 +1,9 @@
 import path from "path";
 import express from "express";
+import { fileURLToPath } from 'url';
 var app = express(); // create express app
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 import bodyParser from 'body-parser';
 import logger from 'morgan';
@@ -43,9 +46,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static(path.resolve(__dirname, '../public')));
+
+// app.use(express.static('public'))
+
 // parse application/json
 app.use(bodyParser.json());
-
 
 //use mongo session
 app.use(session({
@@ -83,12 +89,18 @@ app.use('/', awsRouter);
 app.use('/users', userRoutes);
 app.use('/session', sessionRouter);
 
-// Catch 404 and forward to error handler
-app.use(function (req, res, next) {
-	const err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+// All other GET requests not handled before will return our React app
+app.get('*', (req, res) => {
+	console.log(path.resolve(__dirname, '../public', 'index.html'));
+	res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
 });
+
+// // Catch 404 and forward to error handler
+// app.use(function (req, res, next) {
+// 	const err = new Error('Not Found');
+// 	err.status = 404;
+// 	next(err);
+// });
 
 export default app;
 

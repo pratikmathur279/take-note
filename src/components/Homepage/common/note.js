@@ -5,8 +5,8 @@ import { FaRegStickyNote, FaPlus, FaStar } from 'react-icons/fa';
 const Note = (props) => {
     return (
         <div className={['note-content', (props.currentNote.id === props.note.id ? 'active' : '')].join(' ')} onClick={() => props.setCurrentNote(props.note)} onDoubleClick={() => props.renameNote(props.note.id)}
-            ref={props.wrapperRef}
-            onContextMenu={props.handleContextClick}
+        // ref={props.wrapperRef}
+        // onContextMenu={props.handleContextClick}
         >
             <span class="favorite-icon">
                 {props.note.favorite ? <FaStar /> : null}

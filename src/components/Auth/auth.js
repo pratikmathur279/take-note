@@ -7,7 +7,7 @@ import {
     Link
 } from "react-router-dom";
 
-import Logo from '../../assets/logo-square-color.svg';
+import Logo from '../../../public/images//logo-square-color.svg';
 
 const Auth = (props) => {
     return (

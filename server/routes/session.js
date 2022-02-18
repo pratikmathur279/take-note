@@ -9,6 +9,7 @@ const sessionRouter = express.Router();
 
 //CHECK IF USER IS LOGGED IN
 sessionRouter.get("", ({ session: { user } }, res) => {
+	console.log(user);
 	res.send({ user });
 });
 
@@ -21,7 +22,9 @@ sessionRouter.post("", async (req, res) => {
 		const user = await User.findOne({ email });
 		if (user && user.comparePasswords(password)) {
 			const sessionUser = sessionizeUser(user);
-			req.session.user = sessionUser
+			req.session.user = sessionUser;
+			console.log("sessionUser");
+			console.log(sessionUser);
 			res.send(sessionUser);
 		} else {
 			throw new Error('Invalid login credentials');

@@ -16,7 +16,6 @@ class RenderComponent extends React.Component {
 	}
 
 	getComponent(currentStep = this.props.currentStep) {
-		console.log(currentStep);
 		switch (currentStep) {
 			case "notes": return <Notes />;
 			case "scratchpad": return <Scratchpad />;

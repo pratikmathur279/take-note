@@ -9,8 +9,7 @@
 			margin-top: 2rem;
 			font-weight: 700;
 			font-size: 2rem;
-			line-height: 1.1;
-			letter-spacing: -0.03rem;
+			line-height: 1.35em;
 			margin-bottom: 0;
 			
 		}
@@ -111,6 +110,52 @@
 			a {
 				margin: 0 0.75rem;
 			}
+		}
+  	}
+}
+
+@media screen and (max-width: $tablet){
+	.landing-page {
+		.content {
+			padding: 1rem;
+			h1{
+				font-size: 1.6em;
+			}
+			.subtitle {
+				font-size: 1.25rem;
+			}
+			.p-mobile{
+				font-size: 1.25em;
+			}
+			.container{
+				width: 100%;
+				max-width: 100%;
+				padding: 0;
+				margin: 30px auto;
+				.lead{
+					margin-bottom: 40px;
+					.logo{
+						max-width: 220px;
+					}
+				}
+				img{
+					display: block;
+					width: 80%;
+					margin: 0 auto;
+				}
+			}
+		}
+		h2 {
+			font-size: 1.3em;
+		}
+		p, ul, li {
+			font-size: 1.1em;
+		}
+	}	
+	.footer {
+		.container{
+			width: 80%;
+			margin: 20px auto;
 		}
   	}
 }

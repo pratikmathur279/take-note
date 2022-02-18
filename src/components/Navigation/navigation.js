@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Logo from '../../assets/logo-square-color.svg';
+import Logo from '../../../public/images//logo-square-color.svg';
 import { FaRegStickyNote, FaRegStar, FaRegTrashAlt, FaRegFolder } from 'react-icons/fa';
 import { BiNotepad } from 'react-icons/bi';
 

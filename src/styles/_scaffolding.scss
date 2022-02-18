@@ -2,11 +2,13 @@
 	width: 100%;
 	display: flex;
 	margin: 0;
+	height: calc(100vh - 60px);
+	overflow-y: auto;
 }
 
 .notes-wrapper{
 	display: flex;
-	height: 100vh;
+	height: calc(100vh - 60px);
 	&.night-active{
 		background: $nightMode;
 		.left-container{
@@ -38,9 +40,8 @@
 			justify-content: space-between;
 			padding: 0 10px;
 			h1{
-				font-size: 1.9em;
+				font-size: 1.65em;
 				margin: 10px 0;
-				
 			}
 			svg{
 				width: 22px;
@@ -98,6 +99,7 @@
 			}
 			pre[contenteditable = false]{
 				font-size: 1em;
+				padding: 0 12px;
 			}
 		}
 		

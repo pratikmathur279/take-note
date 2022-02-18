@@ -25,13 +25,13 @@ function requireAuth(nextState, replaceState) {
 		return false;
 	}
 	else {
+		// logged in
 		return true;
 	}
 }
 
 const LayoutComponent = (props) => {
 	if (requireAuth()) {
-		console.log("reached here");
 		return (
 			<div className="app">
 				<AppMenu />

@@ -13,6 +13,12 @@ const UserSchema = new mongoose.Schema({
             message: "Username already exists"
         }
     },
+    first_name: {
+        type: String,
+    },
+    last_name: {
+        type: String,
+    },
     email: {
         type: String,
         validate: {
@@ -23,6 +29,18 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    picture: {
+        type: String
+    },
+    primaryPhoto: {
+        type: String
+    },
+    home_phone: {
+        type: String
+    },
+    cell_phone: {
+        type: String
     }
 }, { timestamps: true });
 

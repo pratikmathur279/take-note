@@ -1,11 +1,6 @@
 import React from 'react';
 import { isMobile } from "react-device-detect";
 
-import lightScreen from '../../assets/screenshot-light.png';
-import darkScreen from '../../assets/screenshot-dark.png'
-import squareLogo from '../../assets/logo-square-white.svg'
-import logo from '../../assets/logo.png';
-
 import Login from '../common/login';
 import Logout from '../common/logout';
 
@@ -23,13 +18,11 @@ class LandingPage extends React.Component {
 
 		this.setUser = this.setUser.bind(this);
 		this._onChange = this._onChange.bind(this);
+		this.logoutUser = this.logoutUser.bind(this);
 		this.actions = new UserActions();
 	}
 
 	componentWillMount() {
-		console.log("here");
-		var user = UserStore.getUser();
-		console.log(user);
 		UserStore.addChangeListener(this._onChange);
 	}
 
@@ -40,10 +33,17 @@ class LandingPage extends React.Component {
 	_onChange() {
 		let user = UserStore.getUser();
 		console.log(user);
+		this.setState({ user });
 	}
 
 	setUser(data) {
 		this.actions.setCurrentUser(data);
+	}
+
+	logoutUser() {
+		this.actions.logoutUser((data) => {
+			console.log(data);
+		});
 	}
 
 	render() {
@@ -53,35 +53,29 @@ class LandingPage extends React.Component {
 				<section className="content">
 					<div className="container">
 						<div className="lead">
-							<img src={logo} alt="TakeNote" />
+							<img src='/images/logo.png' className="app-logo logo" alt="TakeNote" />
 							<h1>The Note Taking App<br /> for Developers</h1>
 							<p className="subtitle">A web-based notes app for developers.</p>
-							{isMobile ? (
+							{isMobile ?
 								<p className="p-mobile">
 									TakeNote is not currently supported for tablet and mobile devices.
 								</p>
-							) : this.state.isDemo ? (
+								:
 								<div className="new-signup">
 									<div>
-										<p>TakeNote is only available as a demo. Your notes will be saved to local storage and <b>not</b> persisted in any database or cloud.</p>
-										<a className="btn blue" href="/app">View Demo</a>
-									</div>
-								</div>
-							) : (
-								<div className="new-signup">
-									<div>
-										<p>TakeNote does not have a database or users. It simply links with your GitHub account for authentication, and stores the data in a private{' '}<code>takenotes-data</code> repo.</p>
+										<p>TakeNote is available as a full stack application. Your notes will persist in a cloud, and store the data in a private{' '}<code>takenotes-data</code> repo.</p>
 										<Login
-											setUser={this.setUser}
+											user={this.state.user}
+											logoutUser={this.logoutUser}
 										/>
 									</div>
 								</div>
-							)}
+							}
 						</div>
 					</div>
 
 					<div className="container">
-						<img src={lightScreen} alt="TakeNote App" className="screenshot" />
+						<img src="/images/screenshot-light.png" alt="TakeNote App" className="screenshot" />
 					</div>
 				</section>
 
@@ -134,18 +128,18 @@ class LandingPage extends React.Component {
 					</div>
 
 					<div className="container">
-						<img src={darkScreen} alt="TakeNote App" className="screenshot" />
+						<img src="/images/screenshot-dark.png" alt="TakeNote App" className="screenshot" />
 					</div>
 				</section>
 
 				<footer className="footer">
 					<div className="container">
-						<img src={squareLogo} alt="TakeNote App" className="logo" />
+						<img src="/images/logo-square-white.svg" alt="TakeNote App" className="logo" />
 						<p>
 							<strong>TakeNote</strong>
 						</p>
 						<nav>
-							<a href="https://github.com/pratikmathur279/NotesApp.git" target="_blank" rel="noopener noreferrer" >Source Code</a>
+							<a href="https://github.com/pratikmathur279/take-note" target="_blank" rel="noopener noreferrer" >Source Code</a>
 						</nav>
 					</div>
 				</footer>

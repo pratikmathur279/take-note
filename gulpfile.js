@@ -1,22 +1,25 @@
-const gulp = require('gulp');
-const imagemin = require('gulp-imagemin');
-const pngquant = require('imagemin-pngquant');
-const sass = require('gulp-sass');
-const browserSync = require('browser-sync');
-const sourcemaps = require('gulp-sourcemaps');
-const browserify = require('browserify');
-const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
+import gulp from 'gulp';
+import imagemin from 'gulp-imagemin';
+import pngquant from 'imagemin-pngquant';
+import gulpSass from 'gulp-sass'
+import dartSass from 'sass'
+const sass = gulpSass(dartSass)
+
+import browserSync from 'browser-sync';
+import sourcemaps from 'gulp-sourcemaps';
+import browserify from 'browserify';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
 
 var config = {
 	sassPath: './src/styles',
-	marketingPath: './src/javascript/components',
-	jsDist: './public/javascript',
+	jsPath: './src',
+	jsDist: './public/javascript/',
 	cssDist: './public/css/'
 };
 
 gulp.task('imagemin', () => {
-	return gulp.resources('./resources/images/*.png')
+	return gulp.src('./src/images/*.png')
 		.pipe(imagemin({
 			progressive: true,
 			svgoPlugins: [{ removeViewBox: false }],
@@ -27,14 +30,14 @@ gulp.task('imagemin', () => {
 
 gulp.task('connect', () => {
 	browserSync({
-		port: 3000,
-		proxy: 'localhost:3456'
+		port: 3010,
+		proxy: 'localhost:3010'
 	});
 });
 
 //import style sheet partials into app.scss.
 gulp.task('mainStyles', () => {
-	gulp.resources(config.sassPath + '/app.scss')
+	return gulp.src(config.sassPath + '/app.scss')
 		.pipe(sourcemaps.init())
 		.pipe(sass({ outputStyle: "compressed" }).on('error', sass.logError))
 		.pipe(sourcemaps.write())
@@ -43,8 +46,22 @@ gulp.task('mainStyles', () => {
 });
 
 //watch sass files for changes
-gulp.task('watch:sass', gulp.series('connect', () => {
-	gulp.watch(config.sassPath + '/*.scss', ['mainStyles']);
-}));
+gulp.task('watch:sass', () => {
+	gulp.watch(config.sassPath + '/*.scss', gulp.series('mainStyles'));
+});
 
-gulp.task('default', gulp.series('connect', 'watch:sass'));
+gulp.task('react', () => {
+	browserify(config.jsPath + '/main.js')
+		.transform('babelify', { presets: ["es2015", "react"] })
+		.bundle()
+		.on('error', console.error.bind(console))
+		.pipe(source('portal.js'))
+		.pipe(buffer())
+		.pipe(gulp.dest(config.jsDist));
+});
+
+gulp.task('watch:react', () => {
+	gulp.watch(config.jsPath + "/**/*", ['react']);
+});
+
+gulp.task('default', gulp.series('connect', 'watch:react', 'watch:sass'));

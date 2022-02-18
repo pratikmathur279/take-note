@@ -5,30 +5,19 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import Logo from '../../assets/logo-square-color.svg';
-// import Logo from '../../assets/logo.png';
+import Logo from '../../../public/images//logo-square-color.svg';
+// import Logo from '../../../public/images//logo.png';
 
 import UserPhoto from '../common/userPhoto';
 
 import UserActions from '../../actions/userActions';
+import UserStore from '../../stores/userStore';
 
 class AppMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {
-                email: "pratikmathur279@gmail.com",
-                email_verified: true,
-                last_name: "Mathur",
-                first_name: "Pratik",
-                locale: "en-GB",
-                name: "Pratik Mathur",
-                nickname: "pratikmathur2791",
-                username: 'pmathur',
-                picture: "https://lh3.googleusercontent.com/a-/AOh14GiFQTrT7h0FPUIsOHJIhruSxXaRMwnrOBPhdKun_g=s96-c",
-                sub: "google-oauth2|112194558552527195279",
-                updated_at: "2021-05-10T22:44:06.901Z"
-            },
+            user: {},
             showProfile: false
         }
 
@@ -36,6 +25,17 @@ class AppMenu extends React.Component {
 
         this.showProfileMenu = this.showProfileMenu.bind(this);
         this.logoutUser = this.logoutUser.bind(this);
+        this._onChange = this._onChange.bind(this);
+    }
+
+    componentWillMount() {
+        UserStore.addChangeListener(this._onChange);
+    }
+
+    _onChange() {
+        let user = UserStore.getUser();
+
+        this.setState({ user });
     }
 
     showProfileMenu(e) {
@@ -54,7 +54,7 @@ class AppMenu extends React.Component {
                 <div className="left-menu">
                     <Link to="/app">
                         <div className="takenote-logo">
-                            <img src={Logo} alt="takenote-logo" />
+                            <img src="/images/logo-square-color.svg" alt="takenote-logo" />
                             <h3>takenote</h3>
                         </div>
                     </Link>
@@ -62,17 +62,12 @@ class AppMenu extends React.Component {
                     <Link to="/app">
                         <h3>Home</h3>
                     </Link>
-
-                    {/* <Link to="/">
-                        <h3>TakeNote</h3>
-                    </Link> */}
                 </div>
-
 
                 <div className="profile-wrapper">
                     <div className="profile">
                         <Link to="/profile" onMouseEnter={this.showProfileMenu}>
-                            <UserPhoto src={this.state.user.picture} name={this.state.user.name} />
+                            <UserPhoto primaryPhoto={this.state.user.primaryPhoto} name={this.state.user.username} />
                         </Link>
                     </div>
                     {this.state.showProfile ?
@@ -85,9 +80,6 @@ class AppMenu extends React.Component {
                             <div className="dropdown-items" onClick={this.logoutUser}>
                                 <p>Logout</p>
                             </div>
-                            {/* <div className="dropdown-items">
-
-                            </div> */}
                         </div>
                         : null}
                 </div>

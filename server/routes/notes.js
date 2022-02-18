@@ -1,7 +1,11 @@
 import express from 'express';
 var router = express.Router();
 import path from "path";
+import { fileURLToPath } from 'url';
 import fs from 'fs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+console.log(__dirname);
 
 import AWS from "aws-sdk";
 AWS.config.update({
@@ -11,11 +15,13 @@ AWS.config.update({
 /* GET home page. */
 router.post('/api/download-note', function (req, res, next) {
     let note = (req.body);
-    console.log(note);
     const content = 'Some content!'
 
     let path1 = path.join(__dirname, '../../public/uploads/');
-    let file = `${path1}${note.name}.txt`;
+    let name = note.name.replace(" ", "_");
+    let file = `${path1}${name}.txt`;
+
+    console.log(file);
 
     fs.writeFile(file, note.text, err => {
         if (err) {
@@ -24,8 +30,7 @@ router.post('/api/download-note', function (req, res, next) {
         }
         else {
             //file written successfully
-            console.log("file written successfully");
-            res.send(`${note.name}.txt`);
+            res.send(`${name}.txt`);
         }
     })
 });
@@ -37,7 +42,6 @@ router.post('/api/notes', function (req, res, next) {
 
     note.lastUpdated = new Date().toISOString();
 
-    console.log(note);
     var table = "Notes";
 
     var params = {
@@ -45,14 +49,11 @@ router.post('/api/notes', function (req, res, next) {
         Item: note
     };
 
-    console.log("Adding a new item...");
-
     var docClient = new AWS.DynamoDB.DocumentClient();
     docClient.put(params, function (err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Added item:", JSON.stringify(data, null, 2));
             res.send(JSON.stringify(note));
         }
     });
@@ -65,8 +66,6 @@ router.put('/api/notes', function (req, res, next) {
     note.lastUpdated = new Date().toISOString();
 
     var table = "Notes";
-
-    console.log(note.name);
 
     var params = {
         TableName: table,
@@ -84,14 +83,11 @@ router.put('/api/notes', function (req, res, next) {
         }
     };
 
-    console.log("Updating note - " + note.id);
-
     var docClient = new AWS.DynamoDB.DocumentClient();
     docClient.update(params, function (err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Added item:", JSON.stringify(data, null, 2));
             res.send(JSON.stringify(note));
         }
     });
@@ -99,8 +95,6 @@ router.put('/api/notes', function (req, res, next) {
 
 //get all notes for user
 router.get('/api/notes/:email', function (req, res, next) {
-    console.log(req.params);
-
     var table = "Notes";
 
     var params = {
@@ -115,14 +109,11 @@ router.get('/api/notes/:email', function (req, res, next) {
         }
     };
 
-    console.log(`Getting items for ${req.params.email}...`);
-
     var docClient = new AWS.DynamoDB.DocumentClient();
     docClient.scan(params, function (err, data) {
         if (err) {
             console.error("Unable to get items. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Getting items:", JSON.stringify(data, null, 2));
             res.send(JSON.stringify(data));
         }
     });
